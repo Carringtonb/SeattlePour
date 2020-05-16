@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomProject", "EcomProject.csproj", "{8AB37CE1-3399-42EF-825D-59256ECBBA0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomTest", "EcomTest\EcomTest.csproj", "{FBFD3589-4A4A-435E-85B3-5840A588BBC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8AB37CE1-3399-42EF-825D-59256ECBBA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB37CE1-3399-42EF-825D-59256ECBBA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB37CE1-3399-42EF-825D-59256ECBBA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB37CE1-3399-42EF-825D-59256ECBBA0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBFD3589-4A4A-435E-85B3-5840A588BBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBFD3589-4A4A-435E-85B3-5840A588BBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBFD3589-4A4A-435E-85B3-5840A588BBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBFD3589-4A4A-435E-85B3-5840A588BBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

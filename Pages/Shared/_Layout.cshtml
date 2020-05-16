@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using EcomProject.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+    @if (SignInManager.IsSignedIn(User))
+    {
+       
+      
+            <div class="box-right">
+                <div class="cart hover-menu">
+                    <p class="icon-cart" title="Add to cart">
+                        <i class="icon"></i>
+                        <span class="cart-count">2</span>
+                    </p>
+                    <div class="cart-list list-menu">
+                        <ul class="list">
+
+                            <li>
+                                <a href="#" title="" class="cart-product-image"><img src="~/images/products/1.jpg" alt="Product"></a>
+                                <div class="text">
+                                    <p class="product-name">Union Bed</p>
+                                    <p class="product-price"><span class="price-old">$700.00</span><span class="price">$350.00</span></p>
+                                    <p class="qty">QTY:01</p>
+                                </div>
+                                <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" title="" class="cart-product-image"><img src="~/images/products/1.jpg" alt="Product"></a>
+                                <div class="text">
+                                    <p class="product-name">Union Bed</p>
+                                    <p class="product-price"><span class="price-old">$700.00</span><span class="price">$350.00</span></p>
+                                    <p class="qty">QTY:01</p>
+                                </div>
+                                <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+                            </li>
+
+                        </ul>
+                        <p class="total"><span class="left">Total:</span> <span class="right">$1121.98</span></p>
+                        <div class="bottom">
+                            <a class="link-v1" href="#" title="viewcart">View Cart</a>
+                            <a class="link-v1 rt" href="#" title="checkout">Check out</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings hover-menu">
+                    <a href="#" title="settings">
+                        <span class="icons-setting"></span>
+                    </a>
+                    <ul class="submenu list-menu align-left">
+                        <li>
+                            <div class="container-fluid">
+
+                                <ul class="infor">
+                                    <li><span class="fa fa-user"></span><a title="My Account">Welcome @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+                                    <li><span class="fa fa-heart"></span><a href="/Store/Cart" title="My Cart">My Cart</a></li>
+                                    <li><span class="fa fa-check-circle"></span><a href="#" title="Checkout">Checkout</a></li>
+                                    <li><form asp-page="/Account/Logout"><span class="fa fa-unlock-alt"></span><button id="openLogin" type="submit" title="logout">Logout</button></form></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+   
+    }
+    else
+    {
+
+        <div class="box-right">
+            <div class="cart hover-menu">
+                <p class="icon-cart" title="Add to cart">
+                    <i class="icon"></i>
+                    <span class="cart-count">2</span>
+                </p>
+                <div class="cart-list list-menu">
+                    <ul class="list">
+
+                        <li>
+                            <a href="#" title="" class="cart-product-image"><img src="~/images/products/1.jpg" alt="Product"></a>
+                            <div class="text">
+                                <p class="product-name">Union Bed</p>
+                                <p class="product-price"><span class="price-old">$700.00</span><span class="price">$350.00</span></p>
+                                <p class="qty">QTY:01</p>
+                            </div>
+                            <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" title="" class="cart-product-image"><img src="~/images/products/1.jpg" alt="Product"></a>
+                            <div class="text">
+                                <p class="product-name">Union Bed</p>
+                                <p class="product-price"><span class="price-old">$700.00</span><span class="price">$350.00</span></p>
+                                <p class="qty">QTY:01</p>
+                            </div>
+                            <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+                        </li>
+
+                    </ul>
+                    <p class="total"><span class="left">Total:</span> <span class="right">$1121.98</span></p>
+                    <div class="bottom">
+                        <a class="link-v1" href="#" title="viewcart">View Cart</a>
+                        <a class="link-v1 rt" href="#" title="checkout">Check out</a>
+                    </div>
+                </div>
+            </div>
+            <div class="settings hover-menu">
+                <a href="#" title="settings">
+                    <span class="icons-setting"></span>
+                </a>
+                <ul class="submenu list-menu align-left">
+                    <li>
+                        <div class="container-fluid">
+
+                            <ul class="infor">
+                                <li><span class="fa fa-heart"></span><a asp-page="/account/login" title="My Cart">Login</a></li>
+                                <li><span class="fa fa-check-circle"></span><a asp-page="/account/register" title="Checkout">Register</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

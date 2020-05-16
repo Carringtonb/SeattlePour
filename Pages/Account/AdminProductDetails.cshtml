@@ -1,0 +1,243 @@
+﻿@page "{productId:int?}"
+@using EcomProject.Models
+@model EcomProject.Pages.Account.AdminProductDetailsModel
+@{
+
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/slick.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Product Details - @Model.product.Name</title>
+</head>
+<body>
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <img src="~/images/seattle.png" alt="images">
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+    <div class="wrappage">
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content popup-search">
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control control-search" placeholder="Search and hit enter...">
+                            <button class="button_search" type="button">Search</button>
+                        </div><!-- /input-group -->
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- End pushmenu -->
+        <div class="wrappage">
+            <header id="header" class="header-v1">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="box">
+                            <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                            <div class="logo">
+                                <a href="~/Store/shopcatalogue" title="The Seattle Pour">
+                                    <img src="~/images/seattle.png" alt="images">
+                                </a>
+                            </div>
+                            <div class="logo-mobile"><a href="~/Store/shopcatalogue" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+
+                            <div class="box-right">
+                                <div class="settings hover-menu">
+                                    <a title="settings">
+                                        <span class="icons-setting"></span>
+                                    </a>
+                                    <ul class="submenu list-menu align-left">
+                                        <li>
+                                            <div class="container-fluid">
+
+                                                <ul class="infor">
+                                                    <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Order History">Order History</a></li>
+                                                    <li><span class="fa fa-heart"></span><a href="/Account/Admin" title="Edit Products">Edit Products</a></li>
+                                                    <li><span class="fa fa-check-circle"></span><a href="/store/shopcatalogue" title="Member">See Shop As Member</a></li>
+                                                    <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                    <p> Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End container -->
+                </div>
+                <!-- End header-top -->
+            </header><!-- /header -->
+            <div class="main-content">
+                <div class="container">
+                    <div class="banner-header banner-lbook3">
+
+                        <img src="~/images/banner-seattle.jpg" alt="Banner-header">
+
+
+                 
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="product-details-content">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="slider-for">
+                                <div>
+                                    <span class="zoom">
+                                        <img class="zoom-images" src="@Model.product.Image" alt="images">
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- End slider-for -->
+
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="box-details-info">
+                                <div class="product-name">
+                                    <h1>@Model.product.Name</h1>
+                                </div>
+                                <!-- End product-name -->
+                                <div class="rating">
+                                    <div class="overflow-h">
+
+                                    </div>
+                                </div>
+                                <!-- End Rating -->
+                                <div class="wrap-price">
+
+                                    <p class="price">$@Model.product.Price</p>
+                                </div>
+                                <!-- End Price -->
+                            </div>
+                            <!-- End box details info -->
+                            <div class="options">
+                                <p>SKU: @Model.product.SKU</p>
+                            </div>
+                            <div class="options">
+                                <p>Size: @Model.product.Size</p>
+                            </div>
+                            <div class="options">
+                                <p>Color: @Model.product.Color</p>
+                            </div>
+                            <div class="options">
+                                <p>Finish: @Model.product.Finish</p>
+                            </div>
+                            <div class="options">
+                                <p>Material: @Model.product.Material</p>
+                            </div>
+                            <div class="options">
+                                <p>Description: @Model.product.Description</p>
+                            </div>
+                            <!-- End row -->
+                            <form enctype="multipart/form-data" method="get" action="/Account/AdminUpdateProduct/@Model.product.ID">
+
+                                <button type="submit" class="link-v1 rt">Edit Product</button>
+                            </form>
+                            <br/>
+                            <form enctype="multipart/form-data" method="post">
+                                <button asp-page-handler="delete" asp-route-id="@Model.product.ID" type="submit" class="link-v1 rt">DELETE Product</button>
+                            </form>
+                            <br /><br />
+                            <br />
+                            <!-- End share -->
+                        </div>
+                        <!-- End Options -->
+                    </div>
+                </div>
+                <!-- End product-details-content -->
+
+            </div>
+            <!-- End container -->
+        </div>
+        <!-- End MainContent -->
+
+
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right" title="images"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div><!-- End wrappage -->
+    <!-- End wrappage -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/slick.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.zoom.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+    <script type="text/javascript">$(document).on('ready', function () {
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                asNavFor: '.slider-nav'
+            });
+            $('.slider-nav').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                dots: false,
+                focusOnSelect: true
+            });
+            $('.zoom').zoom();
+        });</script>
+</body>
+
+</html>
+
+

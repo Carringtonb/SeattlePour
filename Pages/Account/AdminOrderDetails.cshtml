@@ -1,0 +1,207 @@
+﻿@page "{id?}"
+@model EcomProject.Pages.Account.AdminOrderDetailsModel
+@using EcomProject.Models
+@{
+    ViewBag.FirstName = TempData["FirstName"];
+    ViewBag.LastName = TempData["LastName"];
+    ViewBag.Time = TempData["Time"];
+    ViewBag.Price = TempData["Price"];
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/lightgallery.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,500,700,300' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Admin - Order Details</title>
+</head>
+<body>
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <img src="~/images/seattle.png" alt="images">
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End pushmenu -->
+    <div class="wrappage">
+        <header id="header" class="header-v1">
+            <div class="header-top">
+                <div class="container">
+                    <div class="box">
+                        <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                        <div class="logo">
+                            <a href="~/Store/shopcatalogue" title="The Seattle Pour">
+                                <img src="~/images/seattle.png" alt="images">
+                            </a>
+                        </div>
+                        <div class="logo-mobile"><a href="/Store/ShopCatalogue" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+
+
+
+                        <div class="box-right">
+                            <div class="settings hover-menu">
+                                <a title="settings">
+                                    <span class="icons-setting"></span>
+                                </a>
+                                <ul class="submenu list-menu align-left">
+                                    <li>
+                                        <div class="container-fluid">
+
+                                            <ul class="infor">
+                                                <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Order History">Order History</a></li>
+                                                <li><span class="fa fa-heart"></span><a href="/Account/AdminAddProduct" title="Add New Product">Add New Product</a></li>
+                                                <li><span class="fa fa-heart"></span><a href="/Account/Admin" title="Edit Products">Edit Products</li>
+                                                <li><span class="fa fa-check-circle"></span><a href="/store/shopcatalogue" title="Member">See Shop As Member</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                <p> Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End header-top -->
+        </header><!-- /header -->
+        <div class="container">
+            <div class="banner-header banner-lbook3">
+                <img src="~/images/banner-seattle.jpg" alt="Banner-header">
+
+            </div>
+        </div>
+        <br /> <br /> <br />
+        <div class="container container-ver2">
+            <div class="blog-post-container blog-page blog-classic">
+                <div id="primary" class="col-xs-12 col-md-9 float-left center">
+                    <div class="blog-post-container box box-shadow single-post space-30">
+                        <div class="blog-post-item">
+
+                            <div class="head">
+                                <h3>Order Details</h3>
+                                <p class="post-by"><span>@ViewBag.Time</span></p>
+                            </div>
+
+                            <br /> <br /> <br /> <br />
+                            <!-- End head -->
+                            <div class="blog-post-image hover-images">
+                            </div>
+                            <div class="text align-left">
+                                <p>Customer Name: @ViewBag.FirstName.ToUpper() @ViewBag.LastName.ToUpper()</p>
+
+                                <ul class="box space-30">
+                                    @foreach (var item in @Model.OrderDetails)
+                                    {
+                                        <li>@item.Product.Name - @item.Quantity pcs</li>
+
+                                    }
+
+                                </ul>
+                                <div class="box box-shadow center content space-30">
+                                    <p>Order Total: $@ViewBag.Price </p>
+                                    <a class="link-v1 color-brand" href="/account/AdminDashboard" title="Dashboard">Back to Dashboard</a>
+
+                                </div>
+                                <!-- End box-shadow -->
+
+                            </div>
+                            <!-- End text -->
+
+                        </div>
+
+                        <!-- End item -->
+
+                    </div>
+                    <!-- End blog-post-container -->
+
+                </div>
+                <!-- End Primary -->
+
+            </div>
+            <!-- end product sidebar -->
+        </div>
+
+        <div class="container">
+            <div class="newsletter-bottom center">
+                <div class="items">
+                    <img class="img-responsive" src="~/images/FR.jpg" alt="Newsllter">
+
+
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+        <!-- End newsletter -->
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div><!-- End wrappage -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/js/engo-plugins.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="~/js/map-icons.js"></script>
+    <script type="text/javascript" src="~/js/lightgallery.js"></script>
+    <script type="text/javascript" src="~/js/lg-thumbnail.js"></script>
+    <script type="text/javascript" src="~/js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/js/lg-autoplay.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+</body>
+
+</html>
+

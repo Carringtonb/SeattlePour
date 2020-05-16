@@ -1,0 +1,191 @@
+﻿@page
+@model EcomProject.Pages.Account.AdminAddProductModel
+@{
+}
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/lightgallery.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,500,700,300' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Register Page</title>
+</head>
+<body>
+    <div class="wrappage">
+        <header id="header" class="header-v3">
+            <!-- End topbar -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="box">
+                        <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                        <div class="logo">
+                            <a href="/" title="The Seattle Pour">
+                                <img src="~/images/seattle.png" alt="images">
+                            </a>
+                        </div>
+                        <div class="logo-mobile"><a href="Account/Admin" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+                        <div class="box-right">
+                            <div class="settings hover-menu">
+                                <a title="settings">
+                                    <span class="icons-setting"></span>
+                                </a>
+                                <ul class="submenu list-menu align-left">
+                                    <li>
+                                        <div class="container-fluid">
+
+                                            <ul class="infor">
+                                                <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Order History">Order History</a></li>
+                                                <li><span class="fa fa-heart"></span><a href="/Account/Admin" title="Edit Products">Edit Products</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a href="/store/shopcatalogue" title="Member">See Shop As Member</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                <p> Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value </p>
+                            </div>
+                        </div>
+
+                        <nav class="mega-menu">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                        </nav>
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End header-top -->
+        </header>
+
+        <div class="container container-ver2">
+            <div class="page-login box space-50">
+                <div class="row">
+                    <div class="col-md-6 sign-in space-30">
+                        <h3>Add New Product</h3>
+                        <p>Please provide more information for the new product.</p>
+
+                        <!-- End social -->
+
+                        <form class="form-horizontal" method="POST">
+                            <div class="group box space-20">
+                                <label class="control-label">PRODUCT NAME *</label>
+                                <input class="form-control" type="text" placeholder="NAME" name="Name">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">PRICE *</label>
+                                <input class="form-control" type="text" placeholder="PRICE" name="Price">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">SKU *</label>
+                                <input class="form-control" type="text" placeholder="SKU" name="SKU">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">SIZE *</label>
+                                <input class="form-control" type="text" placeholder="SIZE" name="Size">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">COLOR *</label>
+                                <input class="form-control" type="text" placeholder="COLOR" name="Color">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">MATERIAL *</label>
+                                <input class="form-control" type="text" placeholder="MATERIAL" name="Material">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">FINISH *</label>
+                                <input class="form-control" type="text" placeholder="FINISH" name="Finish">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">IMAGE URL *</label>
+                                <input class="form-control" type="text" placeholder="IMAGE URL" name="Image">
+                            </div>
+                            <div class="group box">
+                                <label class="control-label">DESCRIPTION *</label>
+                                <input class="form-control" type="text" placeholder="DESCRIPTION" name="Description">
+                            </div>
+
+                            <div class="remember">
+                                <!-- Margin -->
+                            </div>
+
+                            <button type="submit" class="link-v1 rt">Add New Product</button>
+
+                        </form>
+                        <br />
+
+                        <form class="form-horizontal" method="GET" action="/Account/Admin">
+                            <button type="submit" class="link-v1 rt">GO BACK TO ADMIN DASHBOARD</button>
+                        </form>
+                        <!-- End form -->
+                    </div>
+                    <!-- End col-md-6 -->
+
+                </div>
+            </div>
+
+        </div>
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right" title="images"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/js/engo-plugins.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="~/js/map-icons.js"></script>
+    <script type="text/javascript" src="~/js/lightgallery.js"></script>
+    <script type="text/javascript" src="~/js/lg-thumbnail.js"></script>
+    <script type="text/javascript" src="~/js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/js/lg-autoplay.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+</body>
+
+</html>

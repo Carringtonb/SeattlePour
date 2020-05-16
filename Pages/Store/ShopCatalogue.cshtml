@@ -1,0 +1,288 @@
+﻿@page
+@using EcomProject.Models
+@using Microsoft.AspNetCore.Identity
+@model EcomProject.Pages.Store.ShopCatalogueModel
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    List<CartItems> ListProduct = new List<CartItems>();
+    decimal sum = 0;
+    decimal cartCount = 0;
+    if (TempData["CartItems"] != null)
+    {
+        ViewBag.ListProduct = TempData["CartItems"];
+
+        @foreach (var item in ViewBag.ListProduct)
+        {
+            decimal totalPrice = item.Quantity * item.Product.Price;
+            sum += totalPrice;
+            cartCount += item.Quantity;
+        }
+    }
+
+    ViewBag.Email = TempData["Email"];
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/lightgallery.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,500,700,300' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Catalog</title>
+</head>
+<body>
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <img src="~/images/seattle.png" alt="images">
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End pushmenu -->
+    <div class="wrappage">
+        <header id="header" class="header-v1">
+            <div class="header-top">
+                <div class="container">
+                    <div class="box">
+                        <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                        <div class="logo">
+                            <a href="~/Store/shopcatalogue" title="The Seattle Pour">
+                                <img src="~/images/seattle.png" alt="images">
+                            </a>
+                        </div>
+                        <div class="logo-mobile"><a href="/Store/ShopCatalogue" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+
+                        @if (ViewBag.Email == null)
+                        {
+                            <div class="box-right">
+                                <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                    <p>Please Log in to view our Products!</p>
+                                    <br/>
+                                    <a class="link-v1 color-brand" href="/Account/Login" title="See Order Details">Log In</a>
+                                </div>
+                            </div>
+                        
+                        }
+                        else
+                        {
+
+
+                            <div class="box-right">
+                                <div class="cart hover-menu">
+                                    <p class="icon-cart" title="Add to cart">
+                                        <i class="icon"></i>
+                                        <span class="cart-count">@cartCount</span>
+                                    </p>
+                                    <div class="cart-list list-menu">
+                                        <ul class="list">
+                                            @foreach (var item in ViewBag.ListProduct)
+                                            {
+                                                <li>
+                                                    <a href="/Products/Details/@item.Product.ID" title="" class="cart-product-image"><img src="@item.Product.Image" alt="Product"></a>
+                                                    <div class="text">
+                                                        <p class="product-name">@item.Product.Name</p>
+                                                        <p class="product-price"><span class="price">$@item.Product.Price</span></p>
+                                                        <p class="qty">Quantity:@item.Quantity</p>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        </ul>
+                                        <p class="total"><span class="left">Total:</span> <span class="right">$@sum</span></p>
+                                        <div class="bottom">
+                                            <a class="link-v1" href="/Store/Cart" title="viewcart">View Cart</a>
+                                            <a class="link-v1 rt" href="/Account/Checkout" title="checkout">Check out</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings hover-menu">
+                                    <a title="settings">
+                                        <span class="icons-setting"></span>
+                                    </a>
+                                    <ul class="submenu list-menu align-left">
+                                        <li>
+                                            <div class="container-fluid">
+
+                                                <ul class="infor">
+                                                    @if (ViewBag.Email == "carringtonbeard@live.com" || ViewBag.Email == "teddy.damian@yahoo.com" || ViewBag.Email == "amanda@codefellows.com" || ViewBag.Email == "rice.jonathanm@gmail.com")
+                                                    {
+                                                        <li><span class="fa fa-user"></span><a title="My Account">Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+                                                        <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Admin">Admin Page</a></li>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><span class="fa fa-user"></span><a title="My Account">Welcome @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+
+                                                    }
+                                                    <li><span class="fa fa-heart"></span><a href="/Store/Cart" title="My Cart">My Cart</a></li>
+                                                    <li><span class="fa fa-check-circle"></span><a href="/Account/Checkout" title="Checkout">Checkout</a></li>
+                                                    <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        }
+
+
+
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End header-top -->
+        </header><!-- /header -->
+        <div class="container">
+            <div class="banner-header banner-lbook3">
+                <img src="~/images/banner-seattle.jpg" alt="Banner-header">
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="wrap-breadcrumb">
+                <div class="ordering">
+                    <div class="float-left">
+                        <span class="col active"></span>
+                        <span class="list"></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End wrap-breadcrumb -->
+
+        <div class="container">
+            <div class="products ver2 grid_full hover-shadow furniture">
+
+                @if (ViewBag.Email == null)
+                {
+
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="item-inner">
+                            <div class="product">
+                                <div class="product-images">
+                                    <a title="product-images">
+                                        <img class="primary_image" src="@product.Image" alt="" />
+                                    </a>
+                                </div>
+                                <a title="Bouble Fabric Blazer"><p class="product-title">@product.Name</p></a>
+                                <p class="product-price">$@product.Price</p>
+                                <p class="description">@product.Description</p>
+
+                            </div>
+                            <!-- End product -->
+                        </div>
+                    }
+       
+                }
+                else
+                {
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="item-inner">
+                            <div class="product">
+                                <div class="product-images">
+                                    <a href="/Products/Details/@product.ID" title="product-images">
+                                        <img class="primary_image" src="@product.Image" alt="" />
+                                    </a>
+
+
+                                </div>
+                                <a href="/Products/Details/@product.ID" title="Bouble Fabric Blazer"><p class="product-title">@product.Name</p></a>
+                                <p class="product-price">$@product.Price</p>
+                                <p class="description">@product.Description</p>
+
+                            </div>
+                            <!-- End product -->
+                        </div>
+                    }
+                }
+                <!-- End item -->
+            </div>
+            <!-- End product-tab-content products -->
+        </div>
+        <!-- end tab product all -->
+        <div class="container">
+            <div class="newsletter-bottom center">
+                <div class="items">
+                    <img class="img-responsive" src="~/images/FR.jpg" alt="Newsllter">
+
+
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+        <!-- End newsletter -->
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right" title="images"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div><!-- End wrappage -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/js/engo-plugins.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="~/js/map-icons.js"></script>
+    <script type="text/javascript" src="~/js/lightgallery.js"></script>
+    <script type="text/javascript" src="~/js/lg-thumbnail.js"></script>
+    <script type="text/javascript" src="~/js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/js/lg-autoplay.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+</body>
+
+</html>
+

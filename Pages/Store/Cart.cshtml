@@ -1,0 +1,280 @@
+﻿@page
+@model EcomProject.Pages.Store.CartModel
+@using Microsoft.AspNetCore.Identity
+@using EcomProject.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewBag.Email = TempData["Email"];
+    decimal sum = 0;
+    decimal cartCount = 0;
+
+    @foreach (var item in Model.CartItems)
+    {
+        decimal totalPrice = item.Quantity * item.Product.Price;
+        sum += totalPrice;
+        cartCount += item.Quantity;
+    }
+}
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Cart</title>
+</head>
+<body>
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <img src="~/images/seattle.png" alt="images">
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End pushmenu -->
+    <div class="wrappage">
+        <!-- <div id="rtl">RTL</div> -->
+        <header id="header" class="header-v3">
+            <!-- End topbar -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="box">
+                        <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                        <div class="logo">
+                            <a href="/store/shopcatalogue" title="The Seattle Pour">
+                                <img src="~/images/seattle.png" alt="images">
+                            </a>
+                        </div>
+                        <div class="logo-mobile"><a href="/Store/ShopCatalogue" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+                        <nav class="mega-menu">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                        </nav>
+
+
+
+
+
+                        <div class="box-right">
+                            <div class="cart hover-menu">
+                                <p class="icon-cart" title="Add to cart">
+                                    <i class="icon"></i>
+                                    <span class="cart-count">@cartCount</span>
+                                </p>
+                                <div class="cart-list list-menu">
+                                    <ul class="list">
+                                        @foreach (var item in Model.CartItems)
+                                        {
+                                            <li>
+                                                <a href="/Products/Details/@item.Product.ID" title="" class="cart-product-image"><img src="@item.Product.Image" alt="Product"></a>
+                                                <div class="text">
+                                                    <p class="product-name">@item.Product.Name</p>
+                                                    <p class="product-price"><span class="price">$@item.Product.Price</span></p>
+                                                    <p class="qty">Quantity:@item.Quantity</p>
+                                                </div>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                    <p class="total"><span class="left">Total:</span> <span class="right">$@sum</span></p>
+                                    <div class="bottom">
+                                        <a class="link-v1 rt" href="/Account/Checkout" title="checkout">Check out</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings hover-menu">
+                                <a title="settings">
+                                    <span class="icons-setting"></span>
+                                </a>
+                                <ul class="submenu list-menu align-left">
+                                    <li>
+                                        <div class="container-fluid">
+
+                                            <ul class="infor">
+                                                @if (ViewBag.Email == "carringtonbeard@live.com" || ViewBag.Email == "teddy.damian@yahoo.com" || ViewBag.Email == "amanda@codefellows.com" || ViewBag.Email == "rice.jonathanm@gmail.com" || ViewBag.Email == "Brentshanahan@gmail.com")
+                                                {
+                                                    <li><span class="fa fa-user"></span><a title="My Account">Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+                                                    <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Admin">Admin Page</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li><span class="fa fa-user"></span><a title="My Account">Welcome @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+
+                                                }
+                                                <li><span class="fa fa-check-circle"></span><a href="/Store/ShopCatalogue" title="Catalogue">Shop Catalogue</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a href="/Account/Checkout" title="Checkout">Checkout</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End header-top -->
+        </header><!-- /header -->
+        <div class="container">
+
+            <div class="tp-banner">
+                <div class="container">
+                    <div class="banner-header banner-lbook3">
+                        <img src="~/images/banner-seattle.jpg" alt="Banner-header" />
+                    </div>
+                </div>
+            </div>
+
+            <br />     <br />     <br />
+            <!-- End container -->
+            <div class="container container-ver2">
+                <div class="box cart-container">
+                    <table class="table cart-table space-80">
+                        <thead>
+                            <tr>
+                                <th class="product-photo">Product Name</th>
+
+                                <th class="produc-name"></th>
+                                <th class="total-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="total-price">Total</th>
+                                <th class="product-quantity"></th>
+                                <th class="product-remove"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr class="item_cart">
+                                    <form enctype="multipart/form-data" method="post">
+                                        <td class="product-photo"><img src="@item.Product.Image" alt="Futurelife"></td>
+
+                                        <td class="produc-name"><a href="~/Products/Details/@item.Product.ID" title="">@item.Product.Name</a></td>
+                                        <td class="produc-price"><input value="$@item.Product.Price" size="6" type="text" readonly></td>
+                                        <td class="product-quantity">
+                                            <div class="product-signle-options product_15 clearfix">
+                                                <div class="selector-wrapper size">
+                                                    <div class="quantity">
+                                                        <label asp-for="@item.Quantity" hidden></label>
+                                                        <input asp-for="@item.Quantity" name="Quantity" data-step="1" min="0" value="@item.Quantity" title="Qty" class="qty" size="100" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="produc-price"><input value="$@(item.Product.Price * item.Quantity)" size="6" type="text" readonly></td>
+                                        <td>
+                                            <button asp-page-handler="update" asp-route-id="@item.Product.ID" type="submit" class="link-v1 rt">UPDATE CART</button>
+                                        </td>
+                                        <td>
+                                            <button asp-page-handler="delete" asp-route-id="@item.Product.ID" type="submit" class="link-v1 rt">DELETE</button>
+                                        </td>
+                                    </form>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="float-right">
+                        <a class="link-v1 lh-50" href="/Store/ShopCatalogue" title="CONTINUE SHOPPING">CONTINUE SHOPPING</a>
+                    </div>
+                    <!-- End float-right -->
+                    <div class="box space-30">
+                        <div class="box cart-total space-30">
+                            <div class="row">
+                                <div class="col-md-4 space-30">
+                                    <div class="item">
+                                        <h3 class="title">CART TOTAL</h3>
+                                        <p class="box"><span class="float-left">FLAT-RATE SHIPPING</span><span class="float-right">$32.00</span></p>
+
+
+
+                                        <p class="box space-30"><span class="float-left">SUBTOTAL</span><span class="float-right">$@sum</span></p>
+                                        <form class="form-horizontal" method="POST">
+                                            <button type="submit" class="link-v1 lh-50 rt" title="POCEEED TO CHECKOUT">POCEEED TO CHECKOUT</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End col-md-4 -->
+                            </div>
+                        </div>
+
+                        <!-- End float left -->
+
+                    </div>
+                    <!-- End box -->
+
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End cat-box-container -->
+        </div>
+        <!-- End newsletter -->
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right" title="images"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div>
+
+    <!-- End wrappage -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/js/engo-plugins.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+</body>
+
+</html>
+

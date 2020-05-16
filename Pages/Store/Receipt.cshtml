@@ -1,0 +1,191 @@
+﻿@page
+@model EcomProject.Pages.Store.ReceiptModel
+@using Microsoft.AspNetCore.Identity
+@using EcomProject.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    List<OrderDetails> Orders = new List<OrderDetails>();
+    ViewBag.Orders = TempData["Orders"];
+    ViewBag.Email = TempData["Email"];
+
+    decimal sum = 0;
+
+    @foreach (var item in ViewBag.Orders)
+    {
+        decimal totalPrice = item.Quantity * item.Product.Price;
+        sum += totalPrice;
+    }
+
+}
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-slider.css" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/settings.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+    <title>Order Summary</title>
+</head>
+<body>
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <img src="~/images/seattle.png" alt="images">
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End pushmenu -->
+    <div class="wrappage">
+        <!-- <div id="rtl">RTL</div> -->
+        <header id="header" class="header-v3">
+            <!-- End topbar -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="box">
+                        <p class="icon-menu-mobile"><i class="fa fa-bars"></i></p>
+                        <div class="logo">
+                            <a href="/store/shopcatalogue" title="The Seattle Pour">
+                                <img src="~/images/seattle.png" alt="images">
+                            </a>
+                        </div>
+                        <div class="logo-mobile"><a href="/Store/ShopCatalogue" title="SeattlePour"><img src="~/images/seattle.png" alt="SeattlePour-Logo"></a></div>
+
+
+                        <nav class="mega-menu">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                        </nav>
+
+
+
+
+
+                        <div class="box-right">
+                            <div class="settings hover-menu">
+                                <a title="settings">
+                                    <span class="icons-setting"></span>
+                                </a>
+                                <ul class="submenu list-menu align-left">
+                                    <li>
+                                        <div class="container-fluid">
+
+                                            <ul class="infor">
+                                                @if (ViewBag.Email == "carringtonbeard@live.com" || ViewBag.Email == "teddy.damian@yahoo.com" || ViewBag.Email == "amanda@codefellows.com" || ViewBag.Email == "rice.jonathanm@gmail.com" || ViewBag.Email == "Brentshanahan@gmail.com")
+                                                {
+                                                    <li><span class="fa fa-user"></span><a title="My Account">Welcome Admin, @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+                                                    <li><span class="fa fa-heart"></span><a href="/Account/AdminDashboard" title="Admin">Admin Page</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li><span class="fa fa-user"></span><a title="My Account">Welcome @User.Claims.First(x => x.Type == "FullName").Value</a></li>
+
+                                                }
+                                                <li><span class="fa fa-check-circle"></span><a href="/Store/ShopCatalogue" title="Catalogue">Shop Catalogue</a></li>
+                                                <li><span class="fa fa-check-circle"></span><a asp-page="/Account/Logout" title="Logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End header-top -->
+        </header><!-- /header -->
+        <div class="container">
+
+            <div class="container container-ver2">
+                <div class="box float-left order-complete center space-50">
+                    <div class="icon space-20">
+                        <img src="~/images/icon-order-complete.png" alt="icon">
+                    </div>
+                    <p class="box center space-50">Order Summary</p>
+                    @foreach (var item in ViewBag.Orders)
+                    {
+                        <p class="box center space-50">@item.Product.Name</p>
+                        <p class="box center space-50">Quantity: @item.Quantity</p>
+                    }
+                    <p class="box center space-50">Your order total is $@sum.</p>
+                    <p class="box center space-50">Your order has been submitted! You should receive a confirmation email!</p>
+                    <div class="box">
+                        <a class="link-v1 lh-50 margin-right-20 space-20" href="/" title="HOME PAGE">HOME PAGE</a>
+                        <a class="link-v1 lh-50 rt space-20" href="/Store/ShopCatalogue" title="CONTINUE SHOPPING">CONTINUE SHOPPING</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <!-- End newsletter -->
+        <footer id="footer" class="footer-v3 align-left">
+            <div class="footer-inner">
+                <div class="container container-ver2">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-6">
+                            <a class="box space-30" title="Logo">
+                                <img src="~/images/logowhite.png" alt="Logo">
+                            </a>
+                            <p class="box space-30">We are a team of creative talents, local family business, that works with epoxy pour skill and high quality materials.</p>
+                            <ul class="info-footer">
+                                <li><img src="~/images/footerv3-icon1.png" alt="images">123 King Street, Seattle, WA</li>
+                                <li><img src="~/images/footerv3-icon2.png" alt="images">+206 206 2061</li>
+                                <li><img src="~/images/footerv3-icon3.png" alt="images"><a href="mailto:theseattlepour.com" title="mail">theseattlepour@gmail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <h3 class="title-footer">OPENING TIME</h3>
+                            <ul class="list-footer border">
+                                <li>Monday - Friday : 8 AM - 6 PM</li>
+                                <li>Saturday : 9 AM - 6 PM</li>
+                                <li>Sunday : Close</li>
+                                <li>We Work All The Holidays</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="box bottom">
+                        <p class="float-left">Copyright &copy;2020 The Seattle Pour - All Rights Reserved.</p>
+                        <a class="float-right" title="images"><img class="img-responsive" src="~/images/footer-pay.png" alt="images"></a>
+                    </div>
+                    <!-- End box -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End footer-inner -->
+        </footer>
+    </div>
+
+    <!-- End wrappage -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="~/js/engo-plugins.js"></script>
+    <script type="text/javascript" src="~/js/store.js"></script>
+</body>
+
+</html>
+

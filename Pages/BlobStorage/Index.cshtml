@@ -1,0 +1,13 @@
+﻿@page
+@model EcomProject.Pages.BlobStorage.IndexModel
+@{
+}
+
+<form enctype="multipart/form-data" method="post">
+
+    <label asp-for="Image"></label>
+    <input asp-for="Image" type="file" />
+    <input name="Name" />
+    <button type="submit"> Upload </button>
+
+</form>

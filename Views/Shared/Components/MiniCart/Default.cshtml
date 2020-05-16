@@ -1,0 +1,18 @@
+﻿@model IList<EcomProject.Models.CartItems>
+
+
+<p> POTATO </p>
+
+@foreach (var item in Model)
+{
+<li>
+    <a href="#" title="" class="cart-product-image"><img src="~/images/products/1.jpg" alt="Product"></a>
+    <div class="text">
+        <p class="product-name">@item.Product.Name</p>
+        <p class="product-price"><span class="price">$@item.Product.Price</span></p>
+        <p class="qty">@item.Quantity</p>
+    </div>
+    <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+</li>
+}
+
